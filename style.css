@@ -17,16 +17,16 @@
 
 :root {
   /* Palette — strict monochrome (from website) */
-  --white: #0a0a0a;
-  --snow: #111111;
-  --silver: #1a1a1a;
-  --ash: #2a2a2a;
-  --mist: #444444;
-  --stone: #777777;
-  --graphite: #aaaaaa;
-  --charcoal: #cccccc;
-  --ink: #f0f0f0;
-  --black: #ffffff;
+  --white: #ffffff;
+  --snow: #fafafa;
+  --silver: #f0f0f0;
+  --ash: #e0e0e0;
+  --mist: #c0c0c0;
+  --stone: #999999;
+  --graphite: #555555;
+  --charcoal: #333333;
+  --ink: #111111;
+  --black: #000000;
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -72,7 +72,6 @@ body {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  filter: invert(1);
 }
 
 /* ---------- Top Accent Line ---------- */
@@ -107,7 +106,6 @@ body {
   width: 200px;
   height: auto;
   object-fit: contain;
-  filter: invert(1);
 }
 
 .brand-tagline {
@@ -628,42 +626,42 @@ body {
 }
 
 /* ============================================================
-   LIGHT MODE SUPPORT (follows system preference)
+   DARK MODE SUPPORT (follows system preference)
    ============================================================ */
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --white: #ffffff;
-    --snow: #fafafa;
-    --silver: #f0f0f0;
-    --ash: #e0e0e0;
-    --mist: #c0c0c0;
-    --stone: #999999;
-    --graphite: #555555;
-    --charcoal: #333333;
-    --ink: #111111;
-    --black: #000000;
+    --white: #0a0a0a;
+    --snow: #111111;
+    --silver: #1a1a1a;
+    --ash: #2a2a2a;
+    --mist: #444444;
+    --stone: #777777;
+    --graphite: #aaaaaa;
+    --charcoal: #cccccc;
+    --ink: #f0f0f0;
+    --black: #ffffff;
   }
 
   .person-card {
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
   }
 
   .founder-card {
-    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
   }
 
   .action-btn:hover svg,
   .action-btn:active svg {
-    stroke: var(--white);
-    fill: var(--white);
+    stroke: var(--black);
+    fill: var(--black);
   }
 
   .brand-logo-img {
-    filter: none;
+    filter: invert(1);
   }
 
   .ocean-bg {
-    filter: none;
+    filter: invert(1);
   }
 }
 
