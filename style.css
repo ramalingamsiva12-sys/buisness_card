@@ -1,0 +1,691 @@
+/* ============================================================
+   1:1 CONCEPTS — Online Business Card
+   Mobile-First Design (iPhone 15 Pro Max: 430×932)
+   Theme: Matches website hero — minimalist, white, monochrome
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@300;400;500;600&display=swap');
+
+/* ---------- Reset & Custom Properties ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Palette — strict monochrome (from website) */
+  --white: #ffffff;
+  --snow: #fafafa;
+  --silver: #f0f0f0;
+  --ash: #e0e0e0;
+  --mist: #c0c0c0;
+  --stone: #999999;
+  --graphite: #555555;
+  --charcoal: #333333;
+  --ink: #111111;
+  --black: #000000;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(.25, .46, .45, .94);
+  --ease-smooth: cubic-bezier(.4, 0, .2, 1);
+
+  /* Card dimensions — optimized for latest phones */
+  --card-max-width: 430px;
+  --card-padding: 24px;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: var(--card-max-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* ---------- Ocean Waves Background ---------- */
+.ocean-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ---------- Top Accent Line ---------- */
+.top-accent {
+  width: 100%;
+  height: 3px;
+  background: var(--ink);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+/* ---------- Header / Brand ---------- */
+.card-header {
+  width: 100%;
+  padding: 40px var(--card-padding) 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s var(--ease-smooth) 0.2s forwards;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.brand-logo-img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
+.brand-tagline {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--graphite);
+}
+
+.brand-description {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--graphite);
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 16px auto 0;
+  text-align: center;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.action-primary {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+.action-primary svg {
+  stroke: var(--white);
+}
+
+.action-primary:hover,
+.action-primary:active {
+  background: var(--charcoal);
+  border-color: var(--charcoal);
+}
+
+/* ---------- Main Content ---------- */
+.card-main {
+  width: 100%;
+  padding: 0 var(--card-padding);
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+/* ---------- Person Card ---------- */
+.person-card {
+  background: var(--white);
+  border: 1px solid var(--ash);
+  border-radius: 12px;
+  padding: 28px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s var(--ease-smooth) forwards;
+  transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
+}
+
+.person-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0) 0%, rgba(240,240,240,0.3) 100%);
+  pointer-events: none;
+}
+
+.person-card:active {
+  transform: scale(0.98);
+}
+
+.founder-card {
+  animation-delay: 0.4s;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+}
+
+.cofounder-card {
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------- Badge ---------- */
+.card-badge {
+  display: inline-block;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  background: var(--ink);
+  color: var(--white);
+  border-radius: 100px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.badge-outline {
+  background: transparent;
+  color: var(--charcoal);
+  border: 1px solid var(--ash);
+}
+
+/* ---------- Photo Placeholder ---------- */
+.person-photo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.person-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid var(--ash);
+}
+
+.person-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Person Info ---------- */
+.person-info {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.person-name {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
+.cofounder-card .person-name {
+  font-size: 1.4rem;
+}
+
+.person-role {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 8px;
+}
+
+.person-spec {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--graphite);
+  line-height: 1.5;
+}
+
+/* ---------- Action Buttons ---------- */
+.person-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  background: var(--white);
+  border: 1px solid var(--ash);
+  border-radius: 100px;
+  padding: 10px 18px;
+  text-decoration: none;
+  transition: all 0.3s var(--ease-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.action-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.action-btn:hover,
+.action-btn:active {
+  background: var(--ink);
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+.action-btn:hover svg,
+.action-btn:active svg {
+  stroke: var(--white);
+  fill: var(--white);
+}
+
+.action-sm {
+  padding: 9px 14px;
+  gap: 0;
+}
+
+.action-sm span {
+  display: none;
+}
+
+/* ---------- Section Divider ---------- */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0;
+  opacity: 0;
+  animation: fadeSlideUp 0.6s var(--ease-smooth) 0.7s forwards;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ash);
+}
+
+.divider-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mist);
+  white-space: nowrap;
+}
+
+/* ---------- Co-Founders Grid ---------- */
+.cofounders-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cofounders-grid .cofounder-card:nth-child(1) {
+  animation-delay: 0.8s;
+}
+
+.cofounders-grid .cofounder-card:nth-child(2) {
+  animation-delay: 1.0s;
+}
+
+/* ---------- Footer ---------- */
+.card-footer {
+  width: 100%;
+  padding: 0 var(--card-padding) 40px;
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  animation: fadeSlideUp 0.8s var(--ease-smooth) 1.2s forwards;
+}
+
+.footer-divider {
+  width: 48px;
+  height: 1px;
+  background: var(--ash);
+  margin: 36px auto 28px;
+}
+
+.studio-info {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.studio-address {
+  margin-bottom: 20px;
+}
+
+.info-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mist);
+  margin-bottom: 8px;
+}
+
+.studio-address address {
+  font-style: normal;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--graphite);
+  line-height: 1.7;
+}
+
+.studio-contact {
+  margin-bottom: 20px;
+}
+
+.studio-contact a {
+  font-size: 0.82rem;
+  font-weight: 400;
+  color: var(--charcoal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ash);
+  padding-bottom: 2px;
+  transition: border-color 0.3s var(--ease-smooth);
+}
+
+.studio-contact a:hover {
+  border-color: var(--ink);
+}
+
+.studio-social {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ash);
+  border-radius: 50%;
+  color: var(--charcoal);
+  transition: all 0.3s var(--ease-smooth);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-icon:hover,
+.social-icon:active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--white);
+}
+
+.social-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footer-copy {
+  text-align: center;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: var(--stone);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle floating animation for brand */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Pulse ring on photo hover */
+.person-photo-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid var(--ash);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.6s var(--ease-smooth);
+  pointer-events: none;
+}
+
+.person-card:hover .person-photo-wrapper::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+/* ============================================================
+   RESPONSIVE — scales up for tablets/desktops
+   ============================================================ */
+
+/* Small phones (iPhone SE / 375px) */
+@media (max-width: 380px) {
+  :root {
+    --card-padding: 18px;
+  }
+
+  .brand-logo-img {
+    width: 160px;
+  }
+
+  .person-card {
+    padding: 22px 18px;
+  }
+
+  .person-photo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .person-name {
+    font-size: 1.2rem;
+  }
+
+  .action-btn {
+    padding: 8px 14px;
+    font-size: 0.62rem;
+  }
+
+  .action-sm {
+    padding: 8px 12px;
+  }
+}
+
+/* Mid-range phones (iPhone 14/15: 393px) */
+@media (min-width: 381px) and (max-width: 430px) {
+  .cofounders-grid {
+    gap: 14px;
+  }
+}
+
+/* Larger phones / tablets — allow side by side co-founders */
+@media (min-width: 540px) {
+  :root {
+    --card-max-width: 540px;
+  }
+
+  .cofounders-grid {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .cofounder-card {
+    flex: 1;
+  }
+}
+
+/* Desktop / large screens — centered card with shadow */
+@media (min-width: 768px) {
+  :root {
+    --card-max-width: 480px;
+  }
+
+  body {
+    padding: 40px 20px;
+    min-height: auto;
+    background: var(--snow);
+    border-radius: 16px;
+    box-shadow: 0 8px 60px rgba(0,0,0,0.08);
+    border: 1px solid var(--ash);
+    overflow: hidden;
+  }
+
+  .ocean-bg {
+    position: absolute;
+  }
+
+  .card-header,
+  .card-main,
+  .card-footer {
+    background: transparent;
+  }
+
+  .cofounders-grid {
+    flex-direction: column;
+  }
+}
+
+/* ============================================================
+   SAFE AREA — Notch / Dynamic Island support
+   ============================================================ */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .card-header {
+    padding-top: calc(40px + env(safe-area-inset-top));
+  }
+  .card-footer {
+    padding-bottom: calc(40px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ============================================================
+   DARK MODE SUPPORT (follows system preference)
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #0a0a0a;
+    --snow: #111111;
+    --silver: #1a1a1a;
+    --ash: #2a2a2a;
+    --mist: #444444;
+    --stone: #777777;
+    --graphite: #aaaaaa;
+    --charcoal: #cccccc;
+    --ink: #f0f0f0;
+    --black: #ffffff;
+  }
+
+  .person-card {
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .founder-card {
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .action-btn:hover svg,
+  .action-btn:active svg {
+    stroke: var(--black);
+    fill: var(--black);
+  }
+
+  .brand-logo-img {
+    filter: invert(1);
+  }
+
+  .ocean-bg {
+    filter: invert(1);
+  }
+}
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+  .ocean-bg,
+  .top-accent {
+    display: none;
+  }
+
+  body {
+    background: white;
+    max-width: 100%;
+  }
+
+  .person-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .action-btn {
+    border: 1px solid #ccc;
+  }
+}
