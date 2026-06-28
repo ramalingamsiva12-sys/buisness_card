@@ -134,18 +134,18 @@ body {
   margin-top: 20px;
 }
 
-.action-primary {
+.action-btn.action-primary {
   background: var(--ink);
   color: var(--white);
   border-color: var(--ink);
 }
 
-.action-primary svg {
+.action-btn.action-primary svg {
   stroke: var(--white);
 }
 
-.action-primary:hover,
-.action-primary:active {
+.action-btn.action-primary:hover,
+.action-btn.action-primary:active {
   background: var(--charcoal);
   border-color: var(--charcoal);
 }
@@ -381,20 +381,27 @@ body {
 
 /* ---------- Footer ---------- */
 .card-footer {
-  width: 100%;
-  padding: 0 var(--card-padding) 40px;
+  width: calc(100% - 2 * var(--card-padding));
+  margin: 0 auto 40px;
+  padding: 32px 20px 24px;
   position: relative;
   z-index: 1;
   opacity: 0;
   animation: fadeSlideUp 0.8s var(--ease-smooth) 1.2s forwards;
   animation-play-state: paused;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ash);
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.04);
 }
 
 .footer-divider {
   width: 48px;
   height: 1px;
   background: var(--ash);
-  margin: 36px auto 28px;
+  margin: 0 auto 28px;
 }
 
 .studio-info {
@@ -587,8 +594,7 @@ body {
   }
 
   .card-header,
-  .card-main,
-  .card-footer {
+  .card-main {
     background: transparent;
   }
 
